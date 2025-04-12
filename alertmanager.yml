@@ -1,0 +1,13 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: 'slack-notifications'
+
+receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+      - api_url: '${slack_webhook_url}'
+        channel: '${slack_channel}'
+        send_resolved: true
+

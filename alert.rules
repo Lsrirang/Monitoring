@@ -1,0 +1,77 @@
+groups:
+  - name: node_exporter_alerts
+    rules:
+      - alert: HostHighCPUUsage
+        expr: 100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[1m])) * 100) > 85
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High CPU usage on {{ $labels.instance }}"
+          description: "CPU usage is over 85% on instance {{ $labels.instance }} for more than 2 minutes."
+
+      - alert: HostHighMemoryUsage
+        expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage on {{ $labels.instance }}"
+          description: "Memory usage is over 90% on instance {{ $labels.instance }}."
+
+      - alert: HostDiskFull
+        expr: (node_filesystem_size_bytes{fstype!="tmpfs"} - node_filesystem_free_bytes{fstype!="tmpfs"}) / node_filesystem_size_bytes{fstype!="tmpfs"} * 100 > 90
+        for: 2m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Disk almost full on {{ $labels.instance }}"
+          description: "Disk usage on instance {{ $labels.instance }} is over 90%."
+
+      - alert: NodeDown
+        expr: up{job="node_exporter"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Node down: {{ $labels.instance }}"
+          description: "The Node Exporter for instance {{ $labels.instance }} is down or unreachable."
+
+  - name: cadvisor_alerts
+    rules:
+      - alert: ContainerHighCPUUsage
+        expr: sum by (container_label_io_kubernetes_container_name) (rate(container_cpu_usage_seconds_total{image!=""}[1m])) * 100 > 85
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High container CPU usage: {{ $labels.container_label_io_kubernetes_container_name }}"
+          description: "Container {{ $labels.container_label_io_kubernetes_container_name }} is using more than 85% CPU."
+
+      - alert: ContainerHighMemoryUsage
+        expr: container_memory_usage_bytes{image!=""} / container_spec_memory_limit_bytes{image!=""} > 0.9
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High memory usage in container: {{ $labels.name }}"
+          description: "Container {{ $labels.name }} is using more than 90% of its memory limit."
+
+      - alert: ContainerRestartLoop
+        expr: increase(container_start_time_seconds[5m]) > 1
+        for: 1m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Container restarted recently: {{ $labels.name }}"
+          description: "Container {{ $labels.name }} has restarted more than once in the last 5 minutes."
+
+      - alert: cAdvisorDown
+        expr: up{job="cadvisor"} == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "cAdvisor down on {{ $labels.instance }}"
+          description: "Prometheus could not scrape cAdvisor metrics from {{ $labels.instance }}."
+
