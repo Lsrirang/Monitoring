@@ -75,3 +75,11 @@ groups:
           summary: "cAdvisor down on {{ $labels.instance }}"
           description: "Prometheus could not scrape cAdvisor metrics from {{ $labels.instance }}."
 
+      - alert: DummyAlwaysFiringAlert
+        expr: vector(1)  # Always returns 1
+        for: 10s
+        labels:
+          severity: critical
+        annotations:
+          summary: "This is a dummy alert"
+          description: "It is always firing. Useful for testing your alerting pipeline."
