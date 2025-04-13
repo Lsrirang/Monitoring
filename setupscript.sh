@@ -42,7 +42,7 @@ echo "----- Please modify alertmanager.yml with your Slack Webhook URL and Chann
 echo "Opening alertmanager.yml..."
 sleep 10
 vim alertmanager.yml #modify url and channel in this file
-
+cd ..
 cd Monitoring
 sudo docker-compose up -d
 
