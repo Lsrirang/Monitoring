@@ -33,13 +33,11 @@ $
 </pre>
 
 ### Clone the Repository
-<pre>
-```bash
+<pre>```bash
 $ git clone https://github.com/Lsrirang/Monitoring.git
 $ cd Monitoring
 $ git checkout master
-$ vim alertmanager.yml # (change the slack_webhook_url and channel accordingly)```
-</pre>
+$ vim alertmanager.yml # (change the slack_webhook_url and channel accordingly)```</pre>
 ### Start the containers
 <pre>
  $ docker-compose up -d 
