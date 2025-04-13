@@ -1,0 +1,16 @@
+global:
+  resolve_timeout: 1m
+
+route:
+  receiver: 'slack-notifications'
+  group_wait: 10s
+  group_interval: 30s
+  repeat_interval: 30m
+
+receivers:
+  - name: 'slack-notifications'
+    slack_configs:
+      - api_url: '###################'  #Enter your slack webhook url replacing ################### 
+        channel: '###################'  #enter your channel name replacing ###################
+        send_resolved: true
+
