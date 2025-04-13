@@ -35,12 +35,15 @@ $
 ### Clone the Repository
 ``` 
 git clone https://github.com/Lsrirang/Monitoring.git
-# Navigate into the project directory
+
 cd Monitoring
-# Make sure you're on the master branch
+
 git checkout master
-# Open the Alertmanager configuration file to update your Slack settings
-vim alertmanager.yml # Change the slack_webhook_url and channel accordingly ``` 
+
+# Open the Alertmanager configuration file to update your Slack settings slack_webhook_url and channel
+vim alertmanager.yml 
+
+``` 
 
 ### Start the containers
 <pre>
