@@ -10,7 +10,7 @@ route:
 receivers:
   - name: 'slack-notifications'
     slack_configs:
-      - api_url: '###################'  #Enter your slack webhook url
-        channel: '###################'  #enter your channel name
+      - api_url: '###################'  #Enter your slack webhook url replacing ################### 
+        channel: '###################'  #enter your channel name replacing ###################
         send_resolved: true
 
