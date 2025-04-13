@@ -5,12 +5,12 @@ route:
   receiver: 'slack-notifications'
   group_wait: 10s
   group_interval: 30s
-  repeat_interval: 1m
+  repeat_interval: 30m
 
 receivers:
   - name: 'slack-notifications'
     slack_configs:
-      - api_url: 'https://hooks.slack.com/services/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'
-        channel: '#all-monitoring'
+      - api_url: '###################'  #Enter your slack webhook url
+        channel: '###################'  #enter your channel name
         send_resolved: true
 
