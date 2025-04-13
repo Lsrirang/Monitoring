@@ -10,13 +10,13 @@ In this assessment, **Node Exporter** collects important metrics from the host s
 The project is designed to be scalable and flexible, suitable for anything from a small test system to a full production system. whether we are monitoring few containers or a whole infrastructure, this helps to find performance issues and minimizing downtime. 
 
 **Tools Used**
--> Prometheus
--> Alertmanager
--> Grafana
--> Node Exporter
--> cAdvisor
--> Docker and Docker compose
--> Slack
+- Prometheus
+- Alertmanager
+- Grafana
+- Node Exporter
+- cAdvisor
+- Docker and Docker compose
+- Slack
 
 **Setup**
 **1. Install Docker**
