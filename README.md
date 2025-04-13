@@ -20,9 +20,11 @@ The project is designed to be scalable and flexible, suitable for anything from 
 
 ## Setup
 ### 1. Install Docker
+<pre>
 $ sudo yum update -y
 $ sudo yum install docker -y
 $ sudo systemctl start docker
+</pre>
 
 ### 2. Install Docker Compose
 $
