@@ -40,7 +40,7 @@ git checkout master
 #--modify the alertmanager with your slack credentials(webhook_url and channel)
 echo "----- Please modify alertmanager.yml with your Slack Webhook URL and Channel -----"
 echo "Opening alertmanager.yml..."
-sleep 10
+sleep 5
 vim alertmanager.yml #modify url and channel in this file
 cd ..
 cd Monitoring
