@@ -1,20 +1,35 @@
 #--docker installations steps
-echo "----- Installing Docker -----"
-sudo yum install docker -y 
-sudo systemctl start docker
-sudo systemctl status docker
+echo "----- Checking Docker -----"
+if ! command -v docker &> /dev/null; then
+    echo "Docker not found. Installing Docker..."
+    sudo yum install docker -y 
+    sudo systemctl start docker
+    sudo systemctl status docker
+else
+    echo "Docker is already installed."
+fi
 
-#--docker compose installation step
-echo "----- Installing Docker-Compose -----"
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-ls /usr/local/bin/
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-docker-compose version
+#--checking and installing docker compose 
+echo "----- Checking Docker Compose -----"
+if ! command -v docker-compose &> /dev/null; then
+    echo "Docker Compose not found. Installing Docker Compose..."
+    sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+    ls /usr/local/bin/
+    sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+    sudo chmod +x /usr/local/bin/docker-compose
+    docker-compose version
+else
+    echo "Docker Compose is already installed."
+fi
 
-#--installation of git
-echo "----- Installing Git -----"
-sudo yum install git -y
+#--Checking and installating git
+echo "----- Checking Git -----"
+if ! command -v git &> /dev/null; then
+    echo "----- Installing Git -----"
+    sudo yum install git -y
+else
+    echo "Git is already installed."
+fi
 
 #--Cloning the repository
 echo "----- Cloning the Monitoring Repository -----"
