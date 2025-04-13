@@ -27,17 +27,23 @@ $ sudo systemctl start docker
 </pre>
 
 ### 2. Install Docker Compose
+<pre> 
 $
 $
+</pre>
 
 ### Clone the Repository
+<pre>
 $ git clone https://github.com/Lsrirang/Monitoring.git
 $ cd Monitoring
 $ git checkout master
 $ vim alertmanager.yml (change the slack_webhook_url and channel accordingly)
-
+</pre>
 ### Start the containers
-$ docker-compose up -d
+<pre>
+ $ docker-compose up -d 
+</pre>
+
 
 ### Access the containers with the ports
 -> Prometheus - http://<public-ip-addr>:9090
