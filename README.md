@@ -33,9 +33,15 @@ $
 </pre>
 
 ### Clone the Repository
-<pre> ```bash git clone https://github.com/Lsrirang/Monitoring.git # Navigate into the project directory cd Monitoring # Make sure you're on the master branch git checkout master # Open the Alertmanager configuration file to update your Slack settings vim alertmanager.yml # Change the slack_webhook_url and channel accordingly ``` </pre>
+``` 
+git clone https://github.com/Lsrirang/Monitoring.git
+# Navigate into the project directory
+cd Monitoring
+# Make sure you're on the master branch
+git checkout master
+# Open the Alertmanager configuration file to update your Slack settings
+vim alertmanager.yml # Change the slack_webhook_url and channel accordingly ``` 
 
-<pre> ```bash # Clone the monitoring repository git clone https://github.com/Lsrirang/Monitoring.git # Navigate into the project directory cd Monitoring # Make sure you're on the correct branch git checkout master # Open the Alertmanager config file to modify Slack settings vim alertmanager.yml # change the slack_webhook_url and channel accordingly ``` </pre>
 ### Start the containers
 <pre>
  $ docker-compose up -d 
