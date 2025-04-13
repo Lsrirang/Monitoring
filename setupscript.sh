@@ -43,5 +43,6 @@ echo "Opening alertmanager.yml..."
 sleep 10
 vim alertmanager.yml #modify url and channel in this file
 
+cd Monitoring
 sudo docker-compose up -d
 
