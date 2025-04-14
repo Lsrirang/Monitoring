@@ -22,7 +22,7 @@ The project is designed to be scalable and flexible, suitable for anything from 
 Basic requirements for instance:
 - AMI: Amazon Linux 2 (5.1 Kernel)
 - Instance Type: t2.micro
-- Security Group: Open ports 22, 3000, 3001, 9090, 9093
+- Security Group: Open ports 22, 3000, 3001, 8080, 9090, 9093, 9100
 - Key Pair: Create or select one for SSH access
 
 ## 🔗 Slack Webhook Setup
