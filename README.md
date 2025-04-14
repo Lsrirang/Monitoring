@@ -50,15 +50,14 @@ To retrieve your webhook URL anytime:
 - Your Webhook URLs will be listed under **Webhook URLs for Your Workspace**
 
 Follow these steps to quickly set up the environment:
-
+> ✅ **Note:** You can skip the manual installation and configuration steps if you've already run the setup script using the command below:
 To download the `setupscript.sh` file directly from the GitHub repository, use the following command:
-
 ```bash
 wget https://raw.githubusercontent.com/Lsrirang/Monitoring/master/setupscript.sh
 bash setupscript.sh
 ```
 
-## If you wish to manually setup the system
+## Manual Installation and configuration steps
 ### 1. Install Docker
 <pre>
 $ sudo yum update -y
@@ -80,26 +79,23 @@ $ docker-compose version
 $ sudo yum install git -y
 </pre>
 
-### Clone the Repository
+### 4. Clone the Repository
 ``` 
 git clone https://github.com/Lsrirang/Monitoring.git
-
 cd Monitoring
-
 git checkout master
-
 # Open the Alertmanager configuration file to update your Slack settings slack_webhook_url and channel
 vim alertmanager.yml 
 
 ```
 
-### Start the containers
+### 5. Start the containers
 <pre>
  $ sudo docker-compose up -d 
 </pre>
 
 
-### Access the containers with the ports
+## Access the containers with the ports
 - Prometheus - http://<public-ip-addr>:9090
 - Grafana - http://<public-ip-addr>:3000
 - Alertmanager - http://<public-ip-addr>:9093
@@ -126,19 +122,24 @@ vim alertmanager.yml
 ## Alerts set in the project
 Prometheus will trigger alerts based on the rules that are mentioned in alert.rules. when the alerts are active/fired these are forwarded to Alertmanager which then sends them to the Slack. To make sure that our alert setup is working (to check integration between Prometheus, Alertmanager and slack), i have set a dummy alert that fires always.
 ## Node Exporter Alerts
-### Alert                   Description
-HostHighCPUUsage            CPU usage > 85% for 2 minutes
-HostHighMemoryUsage         Memory usage > 90%
-HostDiskFull                Disk usage > 90%
-NodeDown                    Node Exporter is down
+
+| Alert Name                | Description                      |
+|---------------------------|----------------------------------|
+| `HostHighCPUUsage`        | CPU usage > 85% for 2 minutes    |
+| `HostHighMemoryUsage`     | Memory usage > 90%               |
+| `HostDiskFull`            | Disk usage > 90%                 |
+| `NodeDown`                | Node Exporter is down            |
 
 ## cAdvisor Alerts
-### Alert	                       Description
-ContainerHighCPUUsage	       Container CPU > 85%
-ContainerHighMemoryUsage	   Container memory > 90%
-ContainerRestartLoop	       Restart count > 1 in 5 minutes
-cAdvisorDown	               cAdvisor not reachable
-DummyAlwaysFiringAlert	     Always firing (for testing purpose only)
+
+| Alert Name                | Description                           |
+|---------------------------|---------------------------------------|
+| `ContainerHighCPUUsage`   | Container CPU > 85%                   |
+| `ContainerHighMemoryUsage`| Container memory > 90%               |
+| `ContainerRestartLoop`    | Restart count > 1 in 5 minutes        |
+| `cAdvisorDown`            | cAdvisor not reachable                |
+| `DummyAlwaysFiringAlert`  | Always firing (for testing purpose)  |
+
 
 ## Future Developments
 - in this project we are monitoring system and container health only. we have deployed a Node.js application, we can also monitor at the application level by tracking things like API response times, error rates, and queue size.
