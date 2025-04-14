@@ -19,15 +19,45 @@ The project is designed to be scalable and flexible, suitable for anything from 
 - Slack
 
 ## Setup
-Basic Configuration used:
-- Launch an EC2 instance
-- Keep a Name for instance 
-- Choose AMI (Amazon Linux 2 5.1 kernel)
-- In instance type choose T2.micro
-- Create a key pair
-- Choose a Security Group
-- click launch
-- open the instance
+Basic requirements for instance:
+- AMI: Amazon Linux 2 (5.1 Kernel)
+- Instance Type: t2.micro
+- Security Group: Open ports 22, 3000, 3001, 9090, 9093
+- Key Pair: Create or select one for SSH access
+
+## 🔗 Slack Webhook Setup
+
+To enable Slack alert notifications via Alertmanager, follow these steps:
+
+### Create a Slack Webhook
+
+1. Visit [Slack API Apps](https://api.slack.com/apps)  
+2. Click **Create New App** → choose **From Scratch**
+3. Give your app a name and select your workspace
+4. In the left sidebar, go to **Incoming Webhooks**
+5. Toggle **Activate Incoming Webhooks** to **On**
+6. Click **Add New Webhook to Workspace**
+7. Select the desired Slack channel (e.g., `#alerts`) and click **Allow**
+8. Copy the generated **Webhook URL**
+
+### Find Your Webhook URL Later
+
+To retrieve your webhook URL anytime:
+
+- Go to [Your Slack Apps](https://api.slack.com/apps)
+- Click on your created app
+- Navigate to **Incoming Webhooks**
+- Your Webhook URLs will be listed under **Webhook URLs for Your Workspace**
+
+Follow these steps to quickly set up the environment:
+
+To download the `setupscript.sh` file directly from the GitHub repository, use the following command:
+
+```bash
+wget https://raw.githubusercontent.com/Lsrirang/Monitoring/master/setupscript.sh
+bash setupscript.sh```
+
+## for manual setup
 
 ### 1. Install Docker
 <pre>
@@ -61,7 +91,7 @@ git checkout master
 # Open the Alertmanager configuration file to update your Slack settings slack_webhook_url and channel
 vim alertmanager.yml 
 
-``` 
+```
 
 ### Start the containers
 <pre>
@@ -92,12 +122,6 @@ vim alertmanager.yml
 - Enter dashboard ID 193/1860 for docker container/node exporter full
 - Select Prometheus as the Data Source
 - click on Import
-
-## Getting Slack API 
--
--
--
--
 
 ## Alerts set in the project
 Prometheus will trigger alerts based on the rules that are mentioned in alert.rules. when the alerts are active/fired these are forwarded to Alertmanager which then sends them to the Slack. To make sure that our alert setup is working (to check integration between Prometheus, Alertmanager and slack), i have set a dummy alert that fires always.
