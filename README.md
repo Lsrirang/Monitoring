@@ -18,6 +18,19 @@ The project is designed to be scalable and flexible, suitable for anything from 
 - Docker and Docker compose
 - Slack
 
+## 2.1 Architecture Layout
+This follows a layered architecture where each tool mentioned above has a specific job:
+- **Node Exporter** collects the system metrics like CPU,memory and disk usage from the host machine(i.e EC2 instance)
+- **cAdvisor** collects the container-level metrics such as container CPU and memory usage.
+- **Prometheus** this scrapes data from both Node Exporter and cAdvisor, stores it and watches if there are any issues based on the alert rules we defined.
+-  **Alertmanager** takes information about any alerts that are coming from Prometheus. When there is any alerts, it sends a message to our slack channe to notify us.
+-  **Grafana** connects to the data source in this case Prometheus to visualize the data that is being collected from the Prometheus.
+-  all these tools run as **Docker Containers** and we manage them easily using **Docker Compose**
+-  the entire setup runs on an **EC2 instance** in AWS, but it can work on any linux server.
+
+## 2.2 Why Prometheus?
+Prometheus has being chosen for this project because it fits better for infrastructure and container monitoring due to its Pull-based model and native support for alerting and integrates with Node Exporter and cAdvisor. It's also widely adopted for infrasturcture monitoring and works seamlessly with Grafana dashboards. InfluxDB is great for high frequency or custom metrics, but Prometheus is a better fit for this DevOps monitoring setup.
+
 ## 3. Setup
 ## 3.1 Prerequisites
 AWS EC2 instance or a similar VM running Amazon Linux 2 or a compatible Linux-based OS.
