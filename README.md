@@ -55,10 +55,10 @@ To download the `setupscript.sh` file directly from the GitHub repository, use t
 
 ```bash
 wget https://raw.githubusercontent.com/Lsrirang/Monitoring/master/setupscript.sh
-bash setupscript.sh```
+bash setupscript.sh
+```
 
-## for manual setup
-
+## If you wish to manually setup the system
 ### 1. Install Docker
 <pre>
 $ sudo yum update -y
@@ -144,13 +144,3 @@ DummyAlwaysFiringAlert	     Always firing (for testing purpose only)
 - in this project we are monitoring system and container health only. we have deployed a Node.js application, we can also monitor at the application level by tracking things like API response times, error rates, and queue size.
 - if we are deploying this to production we have to lock it down by adding OAuth to secure access to Prometheus, Grafana and Alertmanager.
 - we can automate everything with terraform to make the monitoring stack reusable and version controlled to save errors made by human.
-
-
-
-
-
-
-
-
-
-
