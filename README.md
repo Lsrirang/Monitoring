@@ -1,6 +1,6 @@
 # Monitoring Setup with Prometheus and Grafana
 
-## 1.Introduction
+## 1. Introduction
 This sets up a complete monitoring and alerting system for docker containers using **Prometheus, Grafana** and **Alertmanager** to help track our infrastructure's health and performance in real time.
 
 With **Prometheus**, we gather and store time-series data about system resources like CPU, memory, disk and network usage. **Grafana** helps us to vizualize all the data that we gather from Prometheus. We can interact with the data, making it easy to get trends, identify issues and track performance over time. if something goes wrong, the **Alertmanager** sends alerts to notify us based on the alert rules that we set. by this we can ensure to respond quickly to any critical situations.
@@ -9,7 +9,7 @@ In this assessment, **Node Exporter** collects important metrics from the host s
 
 The project is designed to be scalable and flexible, suitable for anything from a small test system to a full production system. whether we are monitoring few containers or a whole infrastructure, this helps to find performance issues and minimizing downtime. 
 
-## 2.Tools Used
+## 2. Tools Used
 - Prometheus
 - Alertmanager
 - Grafana
@@ -18,7 +18,7 @@ The project is designed to be scalable and flexible, suitable for anything from 
 - Docker and Docker compose
 - Slack
 
-## 3.Setup
+## 3. Setup
 ## 3.1 Prerequisites
 AWS EC2 instance or a similar VM running Amazon Linux 2 or a compatible Linux-based OS.
 #### Basic requirements for EC2 instance:
@@ -27,7 +27,7 @@ AWS EC2 instance or a similar VM running Amazon Linux 2 or a compatible Linux-ba
 - Security Group: Open ports 22, 3000, 3001, 8080, 9090, 9093, 9100
 - Key Pair: Create or select one for SSH access
 
-## 3.2.Slack Webhook Setup
+## 3.2 Slack Webhook Setup
 
 To enable Slack alert notifications via Alertmanager, follow these steps:
 
@@ -54,7 +54,7 @@ To retrieve your webhook URL anytime:
 ## 3.3 Script-Based setup (Recommanded)
 
 Follow these steps to quickly set up the environment:
-> ✅ **Note:** You can skip the manual installation and configuration steps if you are running the setup script using the command below:
+> ✅ **Note:** You can skip the manual installation and configuration steps in 3.4 if you are running the setup script using the command below:
 To download the `setupscript.sh` file directly from the GitHub repository, use the following command:
 ```bash
 wget https://raw.githubusercontent.com/Lsrirang/Monitoring/master/setupscript.sh
@@ -68,14 +68,14 @@ This script will do the following
 - Start the Docker containers
 
 ## 3.4 Manual Installation and configuration steps
-### 1. Install Docker
+### 3.4.1 Install Docker
 <pre>
 $ sudo yum update -y
 $ sudo yum install docker -y
 $ sudo systemctl start docker
 </pre>
 
-### 2. Install Docker Compose
+### 3.4.2 Install Docker Compose
 <pre> 
 $ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 $ ls /usr/local/bin/
@@ -84,35 +84,35 @@ $ sudo chmod +x /usr/local/bin/docker-compose
 $ docker-compose version
 </pre>
 
-### 3. Install Git
+### 3.4.3 Install Git
 <pre>
 $ sudo yum install git -y
 </pre>
 
-### 4. Clone the Repository
+### 3.4.4 Clone the Repository
 ``` 
 git clone https://github.com/Lsrirang/Monitoring.git
 cd Monitoring
 git checkout master
 ``` 
-### 5. Configure the Alertmanager configuration file with your Slack settings slack_webhook_url and channel
+### 3.4.5 Configure the Alertmanager configuration file with your Slack settings slack_webhook_url and channel
 ```
 vim alertmanager.yml 
 ```
 
-### 6. Start the containers
+### 3.4.6 Start the containers
 <pre>
  $ sudo docker-compose up -d 
 </pre>
 
-## 4.Access the containers with the ports
+## 4. Access the containers with the ports
 - Prometheus - http://<public-ip-addr>:9090
 - Grafana - http://<public-ip-addr>:3000
 - Alertmanager - http://<public-ip-addr>:9093
 - Zomatoapp(node.js) - http://<public-ip-addr>:3001
 Replace <public-ip-addr> with the public IP of your EC2 instance.
 
-## 5.Setting up Grafana for visualization
+## 5. Setting up Grafana for visualization
 ### 5.1 Login to Grafana
 - Username: admin
 - Password: admin
@@ -130,7 +130,7 @@ Replace <public-ip-addr> with the public IP of your EC2 instance.
 - Select Prometheus as the Data Source
 - click on Import
 
-## 6.Alerts set 
+## 6. Alerts set 
 Prometheus will trigger alerts based on the rules that are mentioned in alert.rules. when the alerts are active/fired these are forwarded to Alertmanager which then sends them to the Slack. To make sure that our alert setup is working (to check integration between Prometheus, Alertmanager and slack), i have set a dummy alert that fires always.
 ## 6.1 Node Exporter Alerts
 
@@ -152,7 +152,7 @@ Prometheus will trigger alerts based on the rules that are mentioned in alert.ru
 | `DummyAlwaysFiringAlert`  | Always firing (for testing purpose)  |
 
 
-## 7.Future Developments
+## 7. Future Developments
 - in this project we are monitoring system and container health only. we have deployed a Node.js application, we can also monitor at the application level by tracking things like API response times, error rates, and queue size.
 - if we are deploying this to production we have to lock it down by adding OAuth to secure access to Prometheus, Grafana and Alertmanager.
 - we can automate everything with terraform to make the monitoring stack reusable and version controlled to save errors made by human.
